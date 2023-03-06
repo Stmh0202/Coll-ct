@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <link href="https://unpkg.com/tailwindcss@2.0.4/dist/tailwind.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app" class="bannerDiv">
+        <div  v-show="!itemChosen && !storeChosen" >
+            <img src="pictures/banner_image.svg" class="w-100" alt="logo" />      
+            
+            <p class="bannerLogo text-white absolute font-bold hover:opacity-50 transition duration-500">
+            <a @click="getAllStores(); getAllItems();" >collēct</a>
+            </p>
+            <button @click="ordersChosen = true && getPendingOrders(3)" class="inline-flex items-center absolute bottom-0 right-32 top-8 bg-white shadow-md hover:shadow-xl transition duration-500 hover:scale-105 text-black font-bold py-2 px-4 w-24 h-10 rounded-full">
+              <img src=pictures/menu.svg alt="logo" />
+              <img src="pictures/user.svg" class="ml-4" alt="logo" />
+            </button>
+         
+            
+          <p class="absolute text-left top-36 left-28
+            text-white font-bold text-4xl w-2/6">
+            A kuh-lek-tiv formed by kampungs for kampungs</p>
+            
+            <div class="flex absolute top-16 ml-28 mt-48 rounded-lg">
+                <div class="pt-2 relative mx-auto text-gray-600">
+                  <input class="text-md bg-white h-14 pl-5 pr-56 rounded-lg focus:outline-none transition duration-500 focus:scale-105 text-left"
+                    type="search" name="search" placeholder="Search"></input>
+                
+                </div> 
+            
+                <div class="pt-2 flex mx-auto text-gray-600">
+                  <input class="ml-2 text-md bg-white h-14 pl-4 pr-24 rounded-lg transition duration-500 hover:scale-105"
+                    type="search" name="search" placeholder="Location"></input>
+                  <button class=" text-left bg-black mb-4 hover:shadow-lg hover:scale-105 transition duration-500 text-white text-sm px-6 h-10 mt-3 absolute right-0 top-0 mr-2  rounded-md font-medium focus:outline-none focus:shadow-outline" type="button">
+                  Search
+                </button>
+      
+                </div>
+            
+            </div>
+
+        <h1 class="mx-32 flex bannerDiv mt-16 text-2xl font-bold">Ongoing Collectives</h1>
+        <div class="mx-28 flex overflow-x-auto space-x-8 noScrollbar">
+            <div v-for="item in items" @click="findItem(item); getGroupbys(item);" class='mt-8 flex-none transition duration-500 hover:scale-105 cursor-pointer mb-8 ml-4 mr-4' >
+                <img src="pictures/rattanchair.svg" class="object-cover rounded-2xl w-64 h-72 hover:shadow-lg" />
+                <h2 class='flex text-lg font-bold mt-4'> {{ item.itemName }} </h2>
+                <p class="'flex text-sm font-light'"> {{item.description}}</p>
+                <div class='flex'>
+                    <p class='flex text-lg font-bold mt-1'>
+                        ${{item.discountedPrice}}
+                    </p>
+                    <p class='flex ml-2 text-md font-medium mt-1.5 line-through'>
+                        ${{item.originalPrice}}
+                    </p>
+                    <img src='pictures/profile.svg' alt='profile' class='ml-8 mt-1 object-none rounded-full w-7 h-7'/>
+                    <img src='pictures/profile.svg' alt='profile' class='ml-1 mt-1 object-none rounded-full w-7 h-7'/>
+                </div>
+                
+            </div>
+        </div>
+
+        
+        <h1 class="mx-32 flex bannerDiv mt-16 text-2xl font-bold">Stores</h1>
+        <div id="alltheStores" class="mx-28 flex overflow-x-auto space-x-8 noScrollbar">
+            <div v-for="store in stores" @click="findStore(store)" class ='mt-8 flex-none transition w-80 duration-500 hover:scale-105 cursor-pointer mb-8 ml-4 mr-4'>
+                <img :src="store.Photo" class='object-cover rounded-2xl w-64 h-72 hover:shadow-lg'/>
+                <h2 class='flex text-lg font-bold mt-4'>
+                    {{store.Name}}
+                </h2>
+                <p class='flex text-sm font-light'>
+                    {{store.Description}}
+                </p>
+            </div>
+            
+        </div>  
+      </div>
+      <!-- End of Main Page -->
+
+      <!-- Start of Store details page -->
+      <div id="store_details" v-show="storeChosen">
+        <h1 class="bannerLogo text-black hover:opacity-50 transition duration-500"  @click="getAllStores(); getAllItems();">collēct</h1>
+        <div class="bg-white box-shadow w-5/6 rounded-3xl mx-28 mt-28 flex p-8 ">
+          <img
+            :src="stores.Photo"  
+            alt="productImg"
+            class="rounded-3xl object-fill w-7/12 h-1/12"
+          />
+  
+          <div class="mx-10">
+            <h1 class="text-3xl font-bold mt-8">{{stores.Name}}</h1>
+            <div class="flex mt-6">
+              <img src="pictures/star.svg" alt="star" />
+              <h2 class="font-semibold text-lg ml-2">4.1/5</h2>
+              <h2 class="ml-2 mt-1.5 text-sm">Ratings</h2>
+            </div>
+  
+            <p class="mt-4 opacity-70 text-md font-light">
+              {{stores.Description}}
+            </p>
+  
+            <div class="flex mt-8 opacity-70 text-sm">
+              <p class="font-bold">Address</p>
+              <p class="ml-2">{{stores.Address}}</p>
+            </div>
+  
+            <div class="flex opacity-70 text-sm">
+              <p class="font-bold">Phone</p>
+              <p class="ml-2">{{stores.Phone}}</p>
+            </div>
+  
+            <div class="flex opacity-70 text-sm">
+              <p class="font-bold">Operating Hours</p>
+              <p class="ml-2">{{stores["Operating Hours"]}}</p>
+            </div>
+          </div>
+        </div>
+        <h1 class="mx-32 flex bannerDiv mt-16 text-2xl font-bold">Their Products</h1>
+
+      </div> 
+      <div class='flex'>
+        <div id="storeItems" v-show="storeChosen && !itemChosen" v-for="item of items" class="mx-28 flex overflow-x-auto space-x-8 noScrollbar">
+          <div v-if="item.sid == stores.sid" @click="findItem(item)"class ='mt-8 flex-none transition w-80 duration-500 hover:scale-105 cursor-pointer mb-8 ml-4 mr-4'>
+              <img src="pictures/rattanchair.svg" class='object-cover rounded-2xl w-64 h-72 hover:shadow-lg'/>
+              <h2 class='flex text-lg font-bold mt-4'>
+                  {{ item.itemName }}
+              </h2>
+              <p class='flex text-sm font-light'>
+                  {{item.description}}
+              </p>
+          </div>
+        </div>
+      </div>
+      <!-- End of store details page -->
+
+       <!-- Start of item Details page -->
+       <div id="item_details" v-show="itemChosen">
+       
+        <h1 class="bannerLogo text-black hover:opacity-50 transition duration-500"  @click="getAllStores(); getAllItems();">collēct</h1>
+        <div class="bg-white box-shadow w-5/6 rounded-3xl mx-28 mt-28 flex p-8">
+          <img
+            src="pictures/flower.png"
+            alt="productImg"
+            class="rounded-3xl object-fill w-7/12 h-1/12"
+          />
+  
+          <div class="mx-10">
+            <h1 class="text-3xl font-bold mt-8">{{items[0].itemName}}</h1>
+            <div class="flex mt-6">
+              <img src="pictures/star.svg" alt="star" />
+              <h2 class="font-semibold text-lg ml-2">4.1/5</h2>
+              <h2 class="ml-2 mt-1.5 text-sm">Ratings</h2>
+            </div>
+
+            <div class="flex mt-8">
+              <p class="text-sm font-bold w-48 cursor-pointer" @click="findStore(filteredStore)">{{filteredStore.Name}}</p>
+                <img src="pictures/arrow.svg" alt="arrow" class="hover:scale-110"/>
+            </div>
+
+            <p class="mt-4 opacity-70 text-md font-light">
+              {{items[0].description}}
+            </p>
+
+            <div class='flex mt-8'>
+              <p class='font-bold text-2xl opacity-70'>{{items[0].discountedPrice}}</p>
+              <p class='font-medium text-md mt-1.5 opacity-70 line-through ml-8'>{{items[0].originalPrice}}</p>
+              </div>
+            
+            <div>
+              <div class='flex text-xs font-medium mt-8'>
+                <p >Existing Groups</p>
+                <p class='ml-32'>Start Group</p>
+              </div>
+  
+              <div class='flex mt-2'>
+  
+                <div class='bg-gray-50 p-4 rounded-2xl w-80 h-14 flex hover:opacity-70 cursor-pointer'>
+                  <img src='pictures/profile.svg' alt='profile' class='ml-1 mt-1 object-none rounded-full w-7 h-7'/>
+                  <img src='pictures/profile.svg' alt='profile' class='mt-1 object-none rounded-full w-7 h-7'/>
+                  <p> {{filteredGroupBys.length}} Groups  <i class="arrow down"></i> </p>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div> 
+      <!-- End of item details page -->
+
+      <!-- Start of Order Chosen page -->
+      <div id="item_details" v-show="ordersChosen">
+        
+        <h1 class="bannerLogo text-black hover:opacity-50 transition duration-500"  @click="getAllStores(); getAllItems();">collēct</h1>
+        
+        <div v-for="order of orders">
+          <div class="border-black mt-32 ml-28">
+            <h1 class="text-3xl font-bold cursor-default">My Orders</h1>
+            <h2 class="mt-16 font-semibold text-lg">Pending</h2>
+            <div class="flex"  v-for="order in orders" v-if="order.numItems != order.quota">
+                <div v-for="item of items"  @click="findItem(item)"  class="w-5/12 shadow-md bg-white mt-2 flex rounded-2xl p-6 mr-12 hover:scale-105 transition duration-500 cursor-pointer">
+                  <img src="./src/assets/rattanchair.svg" class="rounded-xl h-48 w-80 object-cover" alt="productImg">
+                  <div class="ml-6">
+                    <h3 class="text-xl font-bold mt-4">{{ item.itemName }}</h2>
+                    <p class="text-sm">{{item.description }}</p>
+                    <div class="flex mt-4">
+                      <p class="font-bold text-lg">{{ item.discountedPrice }}</p>
+                    <p class="font-semibold text-sm mt-1.5 ml-3 line-through">{{ item.originalPrice }}</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <h2 class="mt-16 font-semibold text-lg">Confirmed orders</h2>
+           
+            <div class="flex" v-if="order.numItems == order.quota">
+              <div v-for="item of items" @click="findItem(item)" class="w-5/12 shadow-md bg-white mt-2 flex rounded-2xl p-6 mr-12 hover:scale-105 transition duration-500 cursor-pointer">
+                <img src="./src/assets/rattanchair.svg" class="rounded-xl h-48 w-80 object-cover" alt="productImg">
+                <div class="ml-6">
+                  <h3 class="text-xl font-bold mt-4">{{ item.itemName }}</h2>
+                    <p class="text-sm">{{item.description }}</p>
+                  <div class="flex mt-4">
+                    <p class="font-bold text-lg">${{ item.discountedPrice }}</p>
+                    <p class="font-semibold text-sm mt-1.5 ml-3 line-through">${{ item.originalPrice }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> <!-- End of Orders Chosen Page -->
+
+    </div>
+    <!-- app: container -->
+
+    <script>
+      const itemsURL = "http://127.0.0.1:5100/storeitems";
+      const storeURL = "http://10.124.130.41:5000/store";
+      const groupbyURL = "http://127.0.0.1:5200/gb_tracking";
+      const pending_ordersURL = "http://127.0.0.1:5200/gb_tracking";
+      const app = Vue.createApp({
+        data() {
+          return {
+            items: [],
+            stores: [],
+            orders: [],
+              
+            filteredStore: [],
+            groupbys: [],
+            itemChosen: false,
+            storeChosen: false,
+            filteredGroupBys: []
+          };
+        },
+        methods: {
+          getAllItems() {
+            // on Vue instance created, load the book list
+            const response = fetch(itemsURL)
+              .then((response) => response.json())
+              .then((data) => {
+                this.items = data.data.items;
+                this.itemChosen = false;
+                this.ordersChosen = false;
+
+              })
+              .catch((error) => {
+                // Errors when calling the service; such as network error,
+                // service offline, etc
+                console.log(this.message + error);
+              });
+          },
+         
+          getAllStores() {
+            // on Vue instance created, load the book list
+            const response = fetch(storeURL)
+              .then((response) => response.json())
+              .then((data) => {
+                
+                this.stores = data.data.Stores;
+                this.storeChosen = false;
+              })
+              .catch((error) => {
+                // Errors when calling the service; such as network error,
+                // service offline, etc
+                console.log(this.message + error);
+              });
+          },
+          getGroupbys(item) {
+            // on Vue instance created, load the book list
+            console.log(item)
+            const response = fetch(groupbyURL)
+              .then((response) => response.json())
+              .then((data) => {
+                console.log(data.data)
+                this.groupbys = data.data.gbt
+                console.log(this.groupbys)
+                let filterer = []
+                console.log(this.groupbys)
+                for (each of this.groupbys){
+                  console.log(each.storeId)
+                  if (each.storeId == item.sid && each.itemId == item.itemId){
+                    
+                    filterer.push(each)
+                  }
+                }
+                this.filteredGroupBys = filterer 
+                
+              })
+              .catch((error) => {
+                // Errors when calling the service; such as network error,
+                // service offline, etc
+                console.log(this.message + error);
+              });
+          },
+          findStore(store) {
+            console.log(this.items)
+            const response =
+                fetch(`${storeURL}/${store.sid}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        this.stores = data.data;
+                        console.log(this.stores)
+                        this.storeChosen = true;
+                        this.itemChosen = false;
+                    })
+                    .catch(error => {
+                        // Errors when calling the service; such as network error, 
+                        // service offline, etc
+                        console.log(this.message + error);
+
+                    });
+
+          },
+          findItem(items) {
+            const response =
+                fetch(`${itemsURL}/${items.sid}/${items.itemId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        
+                        this.items = [data.data]
+                        for (each of this.stores){
+                          if (each.sid == this.items[0].sid){
+                            this.filteredStore = each
+                          }
+                        }
+                        
+                        this.itemChosen = true;
+                        this.storeChosen = false;
+                       
+                    })
+                    .catch(error => {
+                        // Errors when calling the service; such as network error, 
+                        // service offline, etc
+                        console.log(this.message + error);
+
+                    });
+
+          },  
+          
+          
+
+          getPendingOrders(customerId) {
+            
+            const response =
+                fetch(`${pending_ordersURL}/${customerId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        
+                        this.orders = data.data.gbt
+                        console.log(this.orders)
+                        for (eachItem of this.items){
+                          for (eachGb of this.orders){
+                            if (eachGb.itemId == eachItem.itemId){
+                              this.items = [eachItem]
+                            }
+                          }
+                        }
+                      
+                        console.log(this.items)
+                        this.ordersChosen = true;
+                    })
+                    .catch(error => {
+                        // Errors when calling the service; such as network error, 
+                        // service offline, etc
+                        console.log(this.message + error);
+
+                    });
+
+          },
+        },
+        created() {
+          // on Vue instance created, load the book list
+          this.getAllItems();
+          this.getAllStores();
+        },
+      });
+      const vm = app.mount("#app");
+    </script>
+  </body>
+</html>

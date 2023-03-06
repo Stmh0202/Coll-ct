@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <link href="./src/output.css" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@2.0.4/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./src/App.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.1/dist/flowbite.min.css" />
+
+
+    <!-- Vue 3 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.js"></script>
+    <!-- Vue 3: production version, optimized for size and speed -->
+    <!-- <script src='https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.prod.js'></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div>
+
+            <h1 class="bannerLogo text-black hover:opacity-50 transition duration-500">collēct</h1>
+            <button class="inline-flex items-center absolute bottom-0 right-32
+              top-8 bg-white shadow-md hover:shadow-xl transition duration-500 hover:scale-105 text-black font-bold py-2 px-4 w-24 h-10 rounded-full">
+                <img src="./pictures/menu.svg" alt="logo" />
+                <img src="./pictures/user.svg" class="ml-4" alt="logo" />
+                </button>
+            <div class="bg-white box-shadow w-5/6 rounded-3xl mx-28 mt-28 flex p-8">
+              <img src="./pictures/guppy.jpg" alt="productImg" class="rounded-3xl object-cover w-7/12 h-1/6"/>
+              <div class="mx-12">
+              <h1 class="text-3xl font-bold mt-8">Guppy Fish</h1>
+              <div class="flex mt-4">
+              <Link to='/store' class="text-sm font-medium w-48 cursor-pointer">By Chun Mee Lee Rattan Furniture 曾美利藤器</Link>
+              <img src="./pictures/arrow.svg" alt="arrow" class="hover:scale-110"/>
+              </div>
+              <p class='mt-6 opacity-70 font-light'>Very old school 1970s Rattan Shop and currently helmed by the 2nd generation owner Mr Chen (nickname Singapore's Rattan Man) and his lady assistant. All the Rattan Furniture found in this shop is entirely painstakingly made by hand.</p>
+              <div class='flex  mt-8'>
+                <p class='font-bold text-2xl opacity-70'>$10.50</p>
+                <p class='font-medium text-md mt-1.5 opacity-70 line-through ml-8'>$12.50</p>
+                </div>
+              
+              <div class='flex text-xs font-medium mt-8'>
+                <p >Existing Groups</p>
+                <p class='ml-32'>Start Group</p>
+                </div>
+                <div class='flex mt-2'>
+                <div class='bg-gray-50 p-4 rounded-2xl w-48 h-14 flex hover:opacity-70 cursor-pointer'>
+                  <p class='text-sm font-semibold'>
+                    5 Groups
+                    </p>
+                    <img src="./pictures/dropdown_group.svg" alt="dropdown" class="ml-16"/>
+                    </div>
+                <div class='bg-gray-50 p-3 rounded-2xl w-48 h-14 ml-4 flex cursor-pointer'>
+                <div>
+                <p class='text-xs font-normal '>
+                    Remaining:
+                    </p><p class='font-bold text-xs'>24 Hours</p>
+      
+                </div>
+                
+                    <button class='bg-black text-white px-6 h-8 align-middle text-sm rounded-lg ml-6 hover:scale-105 transition duration-500'>
+                      Start
+      
+                    </button>
+      
+                  </div>
+      
+      
+                </div>
+                
+              
+      
+      
+              </div>
+              
+            
+            </div>
+            <div class='mx-28 mt-16'>
+              <h2 class='text-2xl font-bold mt-1 ml-4'>Similar Products</h2>
+              <div class='flex'>
+                <Card/><Card/><Card/><Card/>
+              </div>
+              <div class='flex'>
+                <Card/><Card/><Card/><Card/>
+              </div>
+              
+              </div>
+            
+          </div>
+      
+
+</div>
+          <script>
+              let modal = document.getElementById("modal");
+              function modalHandler(val) {
+                  if (val) {
+                      fadeIn(modal);
+                  } else {
+                      fadeOut(modal);
+                  }
+              }
+              function fadeOut(el) {
+                  el.style.opacity = 1;
+                  (function fade() {
+                      if ((el.style.opacity -= 0.1) < 0) {
+                          el.style.display = "none";
+                      } else {
+                          requestAnimationFrame(fade);
+                      }
+                  })();
+              }
+              function fadeIn(el, display) {
+                  el.style.opacity = 0;
+                  el.style.display = display || "flex";
+                  (function fade() {
+                      let val = parseFloat(el.style.opacity);
+                      if (!((val += 0.2) > 1)) {
+                          el.style.opacity = val;
+                          requestAnimationFrame(fade);
+                      }
+                  })();
+              }
+          </script>
+          
+      </dh-component>
+      <!-- Code block ends -->
+  
+
+        </div>
+        
+        <div class='flex'>
+          <Card/><Card/><Card/><Card/>
+        </div>
+        
+        <div class='flex'>
+          <Card/><Card/><Card/><Card/>
+        </div>
+        
+        </div>
+      
+    </div>
+    <script>
+      // $(async () => {
+      //   // Change serviceURL to your own
+      //   sid = 1
+      //   var storeURL = "http://localhost:5000/store/" + {sid}
+      //   try {
+      //     const response = await fetch(storeURL, { method: "GET" }); 
+      //     const result = await response.json();
+      //     if (response.status === 200) {
+      //         store_data = response.data.response // stores all the data
+      //       }
+
+      //     }
+      //   }.catch(error => {
+      //     // Errors when calling the service; such as network error,
+      //     // service offline, etc
+      //     console.log(error);
+      //   } // error
+      // });
+      
+    </script>
+    <script>
+      src =
+        "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js";
+      integrity =
+        "sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM";
+      crossorigin = "anonymous";
+    </script>
+  </body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <!-- Vue 3 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.js"></script>
+    <!-- Vue 3: production version, optimized for size and speed -->
+    <!-- <script src='https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.prod.js'></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="app" class="container">
+      <table class="table table-striped border-1">
+        <thead class="table-dark">
+          <tr>
+            <th>Delivery Id</th>
+            <th>Status</th>
+            <th>Load Type</th>
+            <th>Location</th>
+            <th>Order Id</th>
+
+            
+
+          </tr>
+        </thead>
+        <tbody id="deliveryRecords">
+          <card data={itemid} >item details {{groupbyamt}} </card>
+        </tbody>
+      </table>
+    </div>
+    <script>
+      $(async () => {
+        // Change serviceURL to your own
+        var serviceURL = /.storeitems
+        var 2ndurl  = /groupby/<string>itemid:
+        var serviceURL = "http://192.168.1.245:5000/deliveryrecords";
+        try {
+          const response = await fetch(serviceURL, { method: "GET" }); 
+          const result = await response.json();
+          console.log(result.data.DeliveryRecords);
+          if (response.status === 200) {
+              response.data.response // stores all the data
+              for each in firsturlrepsonse:
+                awaitfetch (2ndurl:itemid, )
+              response2 = await fetch{2ndurl, {{method : get}}}
+              if response.data.groupby.itemid == response2.groupby.itemid 
+                var x = groupby amt 
+            }
+            // add all the rows to the table
+            $("#deliveryRecords").append(rows);
+          }
+        } catch (error) {
+          // Errors when calling the service; such as network error,
+          // service offline, etc
+          console.log(error);
+        } // error
+      });
+    </script>
+    <script>
+      src =
+        "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js";
+      integrity =
+        "sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM";
+      crossorigin = "anonymous";
+    </script>
+  </body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <link href="./src/output.css" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@2.0.4/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./src/App.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.1/dist/flowbite.min.css" />
+
+
+    <!-- Vue 3 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.js"></script>
+    <!-- Vue 3: production version, optimized for size and speed -->
+    <!-- <script src='https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.prod.js'></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <h1 class="bannerLogo text-black">collēct</h1>
+      
+      <button class="inline-flex items-center absolute bottom-0 right-32
+        top-8 bg-white shadow-md hover:shadow-xl transition duration-500 hover:scale-105 text-black font-bold py-2 px-4 w-24 h-10 rounded-full">
+          <img src="./src/assets/menu.svg" alt="logo" />
+          <img src="./src/assets/user.svg" class="ml-4" alt="logo" />
+          </button>
+      
+
+      <div class="bg-white box-shadow w-5/6 rounded-3xl mx-28 mt-28 flex p-8">
+        <img src="./src/assets/aquarium.png" alt="productImg" class="rounded-3xl object-fill w-7/12 h-1/12"/>
+        
+        <div class="mx-10"><h1 class="text-3xl font-bold mt-8">Hai Jing Aquarium</h1>
+          <div class="flex mt-6">
+            <img src="./src/assets/star.svg" alt="star"/>
+            <h2 class="font-semibold text-lg ml-2">4.1/5</h2>
+            <h2 class="ml-2 mt-1.5 text-sm"> Ratings
+              </h2>
+          </div>
+
+        <p class='mt-4 opacity-70 text-md font-light'>Very old school 1970s Rattan Shop and currently helmed by the 2nd generation owner Mr Chen (nickname Singapore's Rattan Man) and his lady assistant. All the Rattan Furniture found in this shop is entirely painstakingly made by hand. Chun Mee Lee's Rattan Furniture are popular with the Expats community in Singapore, as well as locals who appreciate old school Rattan Furniture in their homes.</p>
+        
+        <div class='flex mt-8 opacity-70 text-sm'>
+          <p class='font-bold'>Address</p>
+          <p class='ml-2'>Lim Chu Kang Drive 330559</p>
+          </div>
+        
+        <div class='flex opacity-70 text-sm'>
+          <p class='font-bold'>Phone</p>
+          <p class='ml-2'>6789 8736</p>
+          </div>
+
+        <div class='flex opacity-70 text-sm'>
+          <p class='font-bold'>Operating Hours</p>
+          <p class='ml-2'>Monday-Friday 8:00am-5:00pm</p>
+          </div>
+        </div>
+      </div>
+
+      <div class='mx-28 mt-16'>
+        <div class='flex'>
+          <h2 class='text-2xl font-bold mt-1 ml-4'>Products</h2>
+          <button class='bg-slate-100 rounded-full p-3 font-bold text-sm ml-4 align-middle hover:scale-105 hover:shadow-sm transition duration-500' onclick="modalHandler(true)">+  Add Item</button>
+
+        <dh-component>
+          <div class="py-12 bg-gray-500 bg-opacity-50 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0" id="modal">
+              <div role="alert" class="container mx-auto w-11/12 md:w-2/3 max-w-lg">
+                  <div class="relative py-8 px-5 md:px-10 bg-white mt-16 shadow-md rounded-3xl border border-gray-400">
+                      <h1 class="text-gray-800 text-2xl font-bold tracking-normal leading-tight mb-4 mt-4">Add New Item</h1>
+                      <input type='file' class="mb-3 text-sm rounded-xl"/>
+                      <input id="name" class="mb-3 mt-2 text-gray-500 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-12 flex items-center pl-3 text-sm border-gray-300 rounded-xl border" placeholder="Name" />
+                      <div class="relative mb-3">
+                          <input id="expiry" class="text-gray-500 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-12 flex items-center pl-3 text-sm border-gray-300 rounded-xl border" placeholder="Description" />
+                      </div>
+                      <div class="relative mb-3">
+                        <input id="expiry" class="text-gray-500 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-12 flex items-center pl-3 text-sm border-gray-300 rounded-xl border" placeholder="Original price e.g $10.50" />
+                    </div>
+                    <div class="relative mb-5 flex">
+                      <input id="expiry" class="text-gray-500 focus:outline-none focus:border focus:border-indigo-700 font-normal w-5/12 h-12 flex items-center pl-3 text-sm border-gray-300 rounded-xl border" placeholder="Group Buy Pax" />
+                      <input id="expiry" class="text-gray-500 focus:outline-none focus:border focus:border-indigo-700 font-normal w-5/12 h-12 flex items-center pl-3 text-sm border-gray-300 rounded-xl border ml-4" placeholder="Discounted Price" />
+                    </div>
+ 
+                      <button class="bg-black rounded-xl text-white px-8 py-2 text-sm hover:scale-105 transition duration-500">Submit</button>
+                      <button class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600" onclick="modalHandler()" aria-label="close modal" role="button">
+                          <svg  xmlns="http://www.w3.org/2000/svg"  class="icon icon-tabler icon-tabler-x" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                              <path stroke="none" d="M0 0h24v24H0z" />
+                              <line x1="18" y1="6" x2="6" y2="18" />
+                              <line x1="6" y1="6" x2="18" y2="18" />
+                          </svg>
+                      </button>
+                  </div>
+              </div>
+          </div>
+          <!-- <div class="w-full flex justify-center py-12" id="button">
+              <button class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 mx-auto transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-4 sm:px-8 py-2 text-xs sm:text-sm" onclick="modalHandler(true)">Open Modal</button>
+          </div> -->
+          <script>
+              let modal = document.getElementById("modal");
+              body.style.overflow = "hidden";
+              function modalHandler(val) {
+                  if (val) {
+                      // window.onscroll = function () { window.scrollTo(0, 0); };
+                      // body.style.overflow = "hidden";
+                      fadeIn(modal);
+                  } else {
+                      fadeOut(modal);
+                  }
+              }
+              function fadeOut(el) {
+                  el.style.opacity = 1;
+                  (function fade() {
+                      if ((el.style.opacity -= 0.1) < 0) {
+                          el.style.display = "none";
+                      } else {
+                          requestAnimationFrame(fade);
+                      }
+                  })();
+              }
+              function fadeIn(el, display) {
+                  el.style.opacity = 0;
+                  el.style.display = display || "flex";
+                  (function fade() {
+                      let val = parseFloat(el.style.opacity);
+                      if (!((val += 0.2) > 1)) {
+                          el.style.opacity = val;
+                          requestAnimationFrame(fade);
+                      }
+                  })();
+              }
+          </script>
+          
+      </dh-component>
+      <!-- Code block ends -->
+  
+
+        </div>
+        
+        <div class='flex'>
+          <Card/><Card/><Card/><Card/>
+        </div>
+        
+        <div class='flex'>
+          <Card/><Card/><Card/><Card/>
+        </div>
+        
+        </div>
+      
+    </div>
+    <script>
+      // $(async () => {
+      //   // Change serviceURL to your own
+      //   sid = 1
+      //   var storeURL = "http://localhost:5000/store/" + {sid}
+      //   try {
+      //     const response = await fetch(storeURL, { method: "GET" }); 
+      //     const result = await response.json();
+      //     if (response.status === 200) {
+      //         store_data = response.data.response // stores all the data
+      //       }
+
+      //     }
+      //   }.catch(error => {
+      //     // Errors when calling the service; such as network error,
+      //     // service offline, etc
+      //     console.log(error);
+      //   } // error
+      // });
+      
+    </script>
+    <script>
+      src =
+        "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js";
+      integrity =
+        "sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM";
+      crossorigin = "anonymous";
+    </script>
+  </body>
+</html>
